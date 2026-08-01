@@ -37,7 +37,7 @@ export default function AuthorSearch({ onImport, onClose }: AuthorSearchProps) {
     } catch (e) {
       setError(
         e instanceof Error
-          ? `API エラー: ${e.message}`
+          ? e.message
           : "予期しないエラーが発生しました。しばらく経ってから再試行してください。"
       );
     } finally {
@@ -109,7 +109,7 @@ export default function AuthorSearch({ onImport, onClose }: AuthorSearchProps) {
               type="text"
               value={authorName}
               onChange={(e) => setAuthorName(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              onKeyDown={(e) => e.key === "Enter" && !loading && handleSearch()}
               placeholder="著者名を入力（例: 東野圭吾）"
               className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
